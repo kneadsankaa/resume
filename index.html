@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xingchen Lin - Cloud Resume</title>
+    <style>
+        /* CSS 极简风格变量配置 */
+        :root {
+            --bg-color: #fcfcfc;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --accent-color: #0056b3; /* 点缀色：可替换为 UWA 的经典蓝色 */
+            --border-color: #eaeaea;
+        }
+
+        /* 全局重置与排版 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* 各个内容区块 */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .item {
+            margin-bottom: 25px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .date {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-main);
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* 页脚与访问计数器 */
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .counter-badge {
+            display: inline-block;
+            background-color: #eeeeee;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>感谢光临！您是本站的第 <span id="counter">加载中...</span> 位访客。</p>
+        <h1>Xingchen Lin</h1>
+        <p>IT & Cloud Computing Enthusiast | Perth, WA | xingchen.lin@example.com</p>
+    </header>
+
+    <main>
+        <section id="education">
+            <h2>Education</h2>
+            <div class="item">
+                <div class="item-header">
+                    <h3>The University of Western Australia (UWA)</h3>
+                    <span class="date">Expected 2026</span>
+                </div>
+                <p class="subtitle">Master of Information Technology / Professional Engineering</p>
+                <ul>
+                    <li>Recipient of the Global Excellence Scholarship.</li>
+                    <li>Focus areas: Cloud Computing, Data Engineering, and Systems Architecture.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="item">
+                <p><strong>Cloud Platforms:</strong> AWS (Learning), Azure (Learning)</p>
+                <p><strong>Programming & Tools:</strong> Python, HTML/CSS, Git</p>
+                <p><strong>Languages:</strong> Mandarin (Native), English (Fluent)</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3>The Cloud Resume Challenge</h3>
+                    <span class="date">Jun 2026 - Present</span>
+                </div>
+                <p class="subtitle">Serverless Web Architecture | AWS S3, CloudFront, Lambda, DynamoDB</p>
+                <ul>
+                    <li>Developed a minimalist web resume using raw HTML/CSS and hosted it statically.</li>
+                    <li>[WIP] Provisioning cloud infrastructure to serve the site globally via CDN with HTTPS.</li>
+                    <li>[WIP] Designing a serverless backend using Python and API Gateway to track visitor counts.</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <h3>AI-Powered Cloud Utility (Placeholder)</h3>
+                    <span class="date">Upcoming</span>
+                </div>
+                <p class="subtitle">Serverless Automation | Python, Claude API</p>
+                <ul>
+                    <li>A planned project to automate data processing workflows using cloud functions and LLM APIs.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Designed & Deployed with Cloud Native Architecture.</p>
+        <div class="counter-badge">
+            You are visitor #<span id="visitor-count">--</span>
+        </div>
+    </footer>
+
+    <script>
+        // 当网页完全加载完毕后，立刻执行里面的代码
+        document.addEventListener("DOMContentLoaded", function() {
+            // 你的专属后端 API 接口网址
+            const apiURL = "https://pi6t7gl6pc.execute-api.ap-southeast-2.amazonaws.com/counter";
+
+            // 向后端发起网络请求
+            fetch(apiURL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("网络响应异常");
+                    }
+                    return response.json(); // 解析后端传回的 JSON 数据
+                })
+                .then(data => {
+                    // 抓取到最新的 views 数字，并精准填入 HTML 那个叫 counter 的格子里
+                    document.getElementById("counter").innerText = data.views;
+                })
+                .catch(error => {
+                    console.error("获取计数器失败:", error);
+                    document.getElementById("counter").innerText = "暂无数据";
+                });
+        });
+    </script>
+</body>
+</html>
