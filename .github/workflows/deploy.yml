@@ -1,3 +1,34 @@
-git add .
-git commit -m "Add automated CI/CD pipeline"
-git push origin main
+name: Deploy Cloud Resume Frontend
+
+# 触发条件：只有当 main 分支收到 git push 推送时，流水线才会启动
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 使用 GitHub 提供的最新版 Ubuntu 虚拟服务器来跑自动化
+
+    steps:
+    # 步骤 1：把你在 GitHub 仓库里的代码“下载（检出）”到这台虚拟服务器上
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 步骤 2：拿着你存在 GitHub Secrets 保险箱里的密钥，向 AWS 证明身份
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-southeast-2 # 你的资源所在的悉尼区域
+
+    # 步骤 3：把最新的网页文件同步到你的 S3 静态存储桶中，并自动删除桶里多余的旧文件
+    - name: Deploy to S3
+      run: |
+        aws s3 sync . s3://project-resume-counter-260609 --delete --exclude ".git*"
+
+    # 步骤 4：强行让 CloudFront 刷新全球节点的缓存，确保面试官能立刻看到最新网页
+    - name: Invalidate CloudFront Cache
+      run: |
+        aws cloudfront create-invalidation --distribution-id 替换成你真实的CloudFront分配ID --paths "/*"
