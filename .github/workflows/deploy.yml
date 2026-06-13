@@ -31,4 +31,4 @@ jobs:
     # 步骤 4：强行让 CloudFront 刷新全球节点的缓存，确保面试官能立刻看到最新网页
     - name: Invalidate CloudFront Cache
       run: |
-        aws cloudfront create-invalidation --distribution-id 替换成你真实的CloudFront分配ID --paths "/*"
+        aws cloudfront create-invalidation --distribution-id EFA239ETT16DQ --paths "/*"
